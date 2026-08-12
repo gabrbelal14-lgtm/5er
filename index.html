@@ -30,19 +30,19 @@ button{cursor:pointer}
 .main{flex:1;padding:30px;min-width:0}.header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}.greeting h1{font-size:28px}.greeting p{color:var(--muted);font-size:14px;margin-top:2px}.header-actions{display:flex;gap:10px;flex-wrap:wrap}.top-btn{padding:10px 16px;border-radius:10px;border:0;color:#fff;font-weight:600}.add-btn{background:var(--primary)}.refresh-btn{background:var(--secondary)}
 .view{display:none}.view.active{display:block}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:16px;margin-bottom:22px}.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;gap:14px;align-items:center}.stat-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:19px}.blue{background:rgba(6,182,212,.18);color:var(--secondary)}.purple{background:rgba(139,92,246,.18);color:#c4b5fd}.red{background:rgba(239,68,68,.18);color:#fca5a5}.green{background:rgba(16,185,129,.18);color:#6ee7b7}.stat h3{font-size:23px}.stat p{font-size:12px;color:var(--muted)}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.panel-title h2{font-size:18px}.panel-title p{font-size:12px;color:var(--muted)}
-.list{display:flex;flex-direction:column;gap:10px}.item{background:#151f31;border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:15px}.item-main{min-width:0}.item-main h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-main p{font-size:12px;color:var(--muted);margin-top:4px}.item-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.badge{font-size:10px;padding:4px 8px;border-radius:999px;background:rgba(139,92,246,.16);color:#d8b4fe}.badge.high{background:rgba(239,68,68,.16);color:#fecaca}.badge.medium{background:rgba(245,158,11,.16);color:#fde68a}.badge.low{background:rgba(16,185,129,.16);color:#a7f3d0}.check{width:20px;height:20px;accent-color:var(--success)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap}.panel-title h2{font-size:18px}.panel-title p{font-size:12px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:10px}.item{background:#151f31;border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:15px;transition:0.3s}.item-main{min-width:0}.item-main h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:0.3s}.item-main p{font-size:12px;color:var(--muted);margin-top:4px}.item-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.badge{font-size:10px;padding:4px 8px;border-radius:999px;background:rgba(139,92,246,.16);color:#d8b4fe}.badge.high{background:rgba(239,68,68,.16);color:#fecaca}.badge.medium{background:rgba(245,158,11,.16);color:#fde68a}.badge.low{background:rgba(16,185,129,.16);color:#a7f3d0}.check{width:20px;height:20px;accent-color:var(--success);cursor:pointer}
+.action-btn{background:transparent;border:none;color:var(--muted);font-size:16px;cursor:pointer;transition:0.2s}.action-btn:hover{color:var(--text)}.action-btn.del:hover{color:var(--danger)}.action-btn.edit:hover{color:var(--secondary)}
 .empty{padding:28px;text-align:center;color:var(--muted);font-size:14px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .section-tools{display:flex;gap:8px;flex-wrap:wrap}
 .small-btn{border:1px solid var(--border);background:#243148;color:#fff;padding:8px 11px;border-radius:8px;font-size:12px}
-.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid var(--border);font-size:12px}.table th{color:var(--muted);font-weight:500}
+.filter-select{background:#121b2b;color:var(--text);border:1px solid var(--border);padding:6px 10px;border-radius:8px;font-size:12px;outline:none}
 .progress-wrap{margin-top:16px}.progress-bar{height:10px;border-radius:999px;background:#0e1726;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));width:0;transition:.35s}
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,6,23,.72);backdrop-filter:blur(4px);z-index:2000;align-items:center;justify-content:center;padding:20px}.modal-backdrop.open{display:flex}.modal{width:100%;max-width:520px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 25px 70px rgba(0,0,0,.55)}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.modal-head h3{font-size:18px}.close{background:none;border:0;color:var(--muted);font-size:22px}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-full{grid-column:1/-1}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
 .toast{position:fixed;right:20px;bottom:20px;transform:translateX(150%);transition:.25s;z-index:3000;background:var(--card);padding:14px 18px;border-radius:10px;border-left:4px solid var(--success);box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:360px}.toast.show{transform:translateX(0)}.toast.error{border-left-color:var(--danger)}.toast.info{border-left-color:var(--secondary)}
-.mobile-top{display:none}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.sidebar{width:220px}}
 @media(max-width:700px){.layout{display:block}.sidebar{position:fixed;left:0;bottom:0;top:auto;width:100%;height:auto;z-index:1500;padding:8px 8px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;border-top:1px solid var(--border);border-right:0}.logo,.sidebar .logout-item{display:none}.nav-item{margin:0;padding:8px 4px;justify-content:center;flex-direction:column;gap:3px;font-size:10px}.main{padding:18px 14px 88px}.header{align-items:flex-start;flex-direction:column}.header-actions{width:100%}.top-btn{flex:1}.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}}
 </style>
@@ -97,6 +97,7 @@ button{cursor:pointer}
         </div>
       </div>
 
+      <!-- Dashboard -->
       <section class="view active" id="view-dashboard">
         <div class="stats">
           <div class="stat"><div class="stat-icon blue"><i class="fas fa-book-open"></i></div><div><h3 id="stat-courses">0</h3><p>Courses Today</p></div></div>
@@ -105,12 +106,16 @@ button{cursor:pointer}
           <div class="stat"><div class="stat-icon green"><i class="fas fa-chart-line"></i></div><div><h3 id="stat-progress">0%</h3><p>Today's Progress</p></div></div>
         </div>
         <div class="panel">
-          <div class="panel-title"><div><h2>⚡ Smart Daily Planner</h2><p>Your important items for today.</p></div><button class="small-btn" onclick="showSection('tasks')">View all tasks</button></div>
+          <div class="panel-title">
+            <div><h2>⚡ Smart Daily Planner</h2><p>Your important items for today.</p></div>
+            <button class="small-btn" onclick="showSection('tasks')">View all tasks</button>
+          </div>
           <div id="dashboard-list" class="list"></div>
           <div class="progress-wrap"><div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div></div>
         </div>
       </section>
 
+      <!-- Schedule -->
       <section class="view" id="view-schedule">
         <div class="panel">
           <div class="panel-title"><div><h2>📅 Today's Schedule</h2><p>Courses and tasks sorted by time.</p></div></div>
@@ -118,23 +123,50 @@ button{cursor:pointer}
         </div>
       </section>
 
+      <!-- Courses -->
       <section class="view" id="view-courses">
         <div class="panel">
-          <div class="panel-title"><div><h2>📚 Courses</h2><p>Manage your daily and upcoming courses.</p></div><button class="small-btn" onclick="openModal('course')">+ Add Course</button></div>
+          <div class="panel-title">
+            <div><h2>📚 Courses</h2><p>Manage your daily and upcoming courses.</p></div>
+            <div class="section-tools">
+              <select id="filter-courses" class="filter-select" onchange="renderCourses()">
+                <option value="all">All Courses</option><option value="active" selected>Active</option><option value="completed">Completed</option>
+              </select>
+              <button class="small-btn" onclick="openModal('course')">+ Add Course</button>
+            </div>
+          </div>
           <div id="courses-list" class="list"></div>
         </div>
       </section>
 
+      <!-- Tasks -->
       <section class="view" id="view-tasks">
         <div class="panel">
-          <div class="panel-title"><div><h2>📝 Tasks</h2><p>Homework, work and study tasks.</p></div><button class="small-btn" onclick="openModal('task')">+ Add Task</button></div>
+          <div class="panel-title">
+            <div><h2>📝 Tasks</h2><p>Homework, work and study tasks.</p></div>
+            <div class="section-tools">
+              <select id="filter-tasks" class="filter-select" onchange="renderTasks()">
+                <option value="all">All Tasks</option><option value="active" selected>Active</option><option value="completed">Completed</option>
+              </select>
+              <button class="small-btn" onclick="openModal('task')">+ Add Task</button>
+            </div>
+          </div>
           <div id="tasks-list" class="list"></div>
         </div>
       </section>
 
+      <!-- Backlog -->
       <section class="view" id="view-backlog">
         <div class="panel">
-          <div class="panel-title"><div><h2>🔄 Backlog</h2><p>Sessions that still need to be studied.</p></div><button class="small-btn" onclick="openModal('backlog')">+ Add Session</button></div>
+          <div class="panel-title">
+            <div><h2>🔄 Backlog</h2><p>Sessions that still need to be studied.</p></div>
+            <div class="section-tools">
+              <select id="filter-backlog" class="filter-select" onchange="renderBacklog()">
+                <option value="all">All Sessions</option><option value="active" selected>Active</option><option value="completed">Completed</option>
+              </select>
+              <button class="small-btn" onclick="openModal('backlog')">+ Add Session</button>
+            </div>
+          </div>
           <div id="backlog-list" class="list"></div>
         </div>
       </section>
@@ -142,9 +174,10 @@ button{cursor:pointer}
   </div>
 </div>
 
+<!-- Add/Edit Task Modal -->
 <div id="modal-task" class="modal-backdrop">
   <div class="modal">
-    <div class="modal-head"><h3>➕ Add New Task</h3><button class="close" onclick="closeModal('task')">&times;</button></div>
+    <div class="modal-head"><h3 id="title-modal-task">➕ Add New Task</h3><button class="close" onclick="closeModal('task')">&times;</button></div>
     <div class="form-grid">
       <div class="input-group form-full"><label>Task Name</label><input id="task-title" type="text" placeholder="e.g. Math Homework"></div>
       <div class="input-group"><label>Type</label><select id="task-type"><option>Homework</option><option>Work</option><option>Study</option><option>Other</option></select></div>
@@ -153,166 +186,365 @@ button{cursor:pointer}
       <div class="input-group"><label>Priority</label><select id="task-priority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
       <div class="input-group"><label>Deadline</label><input id="task-deadline" type="time"></div>
     </div>
-    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('task')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitTask()">Add Task</button></div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('task')">Cancel</button><button id="btn-submit-task" class="btn btn-primary" style="width:auto" onclick="submitTask()">Add Task</button></div>
   </div>
 </div>
 
+<!-- Add/Edit Course Modal -->
 <div id="modal-course" class="modal-backdrop">
   <div class="modal">
-    <div class="modal-head"><h3>📚 Add Course</h3><button class="close" onclick="closeModal('course')">&times;</button></div>
+    <div class="modal-head"><h3 id="title-modal-course">📚 Add Course</h3><button class="close" onclick="closeModal('course')">&times;</button></div>
     <div class="form-grid">
       <div class="input-group form-full"><label>Course Name</label><input id="course-name" type="text" placeholder="e.g. Physics"></div>
       <div class="input-group"><label>Date</label><input id="course-date" type="date"></div>
       <div class="input-group"><label>Start Time</label><input id="course-start" type="time"></div>
       <div class="input-group"><label>End Time</label><input id="course-end" type="time"></div>
     </div>
-    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('course')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitCourse()">Add Course</button></div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('course')">Cancel</button><button id="btn-submit-course" class="btn btn-primary" style="width:auto" onclick="submitCourse()">Add Course</button></div>
   </div>
 </div>
 
+<!-- Add/Edit Backlog Modal -->
 <div id="modal-backlog" class="modal-backdrop">
   <div class="modal">
-    <div class="modal-head"><h3>🔄 Add Backlog Session</h3><button class="close" onclick="closeModal('backlog')">&times;</button></div>
+    <div class="modal-head"><h3 id="title-modal-backlog">🔄 Add Backlog Session</h3><button class="close" onclick="closeModal('backlog')">&times;</button></div>
     <div class="form-grid">
       <div class="input-group form-full"><label>Session Name</label><input id="backlog-name" type="text" placeholder="e.g. SAT Math Session 4"></div>
       <div class="input-group"><label>Subject</label><input id="backlog-subject" type="text" placeholder="Math"></div>
       <div class="input-group"><label>Duration (minutes)</label><input id="backlog-duration" type="number" min="1" value="60"></div>
       <div class="input-group"><label>Priority</label><select id="backlog-priority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
     </div>
-    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('backlog')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitBacklog()">Add Session</button></div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('backlog')">Cancel</button><button id="btn-submit-backlog" class="btn btn-primary" style="width:auto" onclick="submitBacklog()">Add Session</button></div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="modal-confirm" class="modal-backdrop">
+  <div class="modal" style="max-width:380px; text-align:center;">
+    <h3 style="margin-bottom: 10px; color: var(--danger);"><i class="fas fa-exclamation-triangle"></i> Delete Item</h3>
+    <p style="color:var(--muted); font-size:14px; margin-bottom:20px;">Are you sure you want to delete this item? This action cannot be undone.</p>
+    <div class="modal-actions" style="justify-content:center;">
+      <button class="btn btn-secondary" onclick="closeModal('confirm')">Cancel</button>
+      <button class="btn btn-danger" style="width:auto;" onclick="executeDelete()">Yes, Delete</button>
+    </div>
   </div>
 </div>
 
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbxFtCp8yDiOYl_D10f5IroUerCxVZ2A2ZiPK1S3vv7zFaRzAMfPf_Tf0AUMbeAlgTd2Ug/exec';
-let currentUser=JSON.parse(localStorage.getItem('studyflow_user')||'null');
-let appData={tasks:[],courses:[],backlog:[],notifications:[],studySessions:[]};
+// --- Configuration & State ---
+const API_URL = 'https://script.google.com/macros/s/AKfycbxFtCp8yDiOYl_D10f5IroUerCxVZ2A2ZiPK1S3vv7zFaRzAMfPf_Tf0AUMbeAlgTd2Ug/exec';
+let currentUser = JSON.parse(localStorage.getItem('studyflow_user') || 'null');
+let appData = { tasks: [], courses: [], backlog: [], notifications: [], studySessions: [] };
 
-const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-const isToday=v=>{if(!v)return false;const s=String(v).slice(0,10);return s===todayISO()||new Date(v).toDateString()===new Date().toDateString()};
-const formatDate=v=>{if(!v)return '';const d=new Date(v);return isNaN(d)?String(v):d.toLocaleDateString('en-US',{month:'short',day:'numeric'})};
-const statusDone=v=>String(v).toLowerCase()==='completed';
-const priorityClass=v=>String(v||'').toLowerCase();
+let editState = { type: null, id: null };
+let deleteState = { type: null, id: null, sheetName: null, idCol: null, arrName: null };
 
-document.getElementById('current-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-document.querySelectorAll('.nav-item[data-section]').forEach(el=>el.addEventListener('click',()=>showSection(el.dataset.section)));
+// --- Utility Functions ---
+const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
+const isToday = v => { if(!v) return false; return String(v).slice(0,10) === todayISO() || new Date(v).toDateString() === new Date().toDateString(); };
+const formatDate = v => { if(!v) return ''; const d = new Date(v); return isNaN(d) ? String(v) : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+const statusDone = v => String(v).toLowerCase() === 'completed';
+const priorityClass = v => String(v || '').toLowerCase();
 
-window.addEventListener('load',()=>{if(currentUser)showAppScreen()});
+// --- Initialization ---
+document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+window.addEventListener('load', () => { if(currentUser) showAppScreen(); });
 
-function toggleAuth(){const login=document.getElementById('login-form'),reg=document.getElementById('register-form');const showReg=reg.style.display==='none';login.style.display=showReg?'none':'block';reg.style.display=showReg?'block':'none'}
-async function apiCall(payload){
-  const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-  const result=await response.json();
-  if(result.status==='error')throw new Error(result.message||'API error');
+// --- Auth ---
+function toggleAuth() {
+  const login = document.getElementById('login-form'), reg = document.getElementById('register-form');
+  const showReg = reg.style.display === 'none';
+  login.style.display = showReg ? 'none' : 'block';
+  reg.style.display = showReg ? 'block' : 'none';
+}
+
+async function apiCall(payload) {
+  const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+  const result = await response.json();
+  if (result.status === 'error') throw new Error(result.message || 'API error');
   return result.data;
 }
-async function login(){
-  const email=document.getElementById('login-email').value.trim(),password=document.getElementById('login-password').value;
-  if(!email||!password)return showToast('Please enter email and password','error');
-  document.getElementById('login-loader').style.display='block';
-  try{const data=await apiCall({action:'login',Email:email,Password:password});currentUser=data;localStorage.setItem('studyflow_user',JSON.stringify(data));showToast('Login successful!');showAppScreen()}catch(e){showToast(e.message,'error')}finally{document.getElementById('login-loader').style.display='none'}
+
+async function login() {
+  const email = document.getElementById('login-email').value.trim(), password = document.getElementById('login-password').value;
+  if (!email || !password) return showToast('Please enter email and password', 'error');
+  document.getElementById('login-loader').style.display = 'block';
+  try {
+    const data = await apiCall({ action: 'login', Email: email, Password: password });
+    currentUser = data; localStorage.setItem('studyflow_user', JSON.stringify(data));
+    showToast('Login successful!'); showAppScreen();
+  } catch (e) { showToast(e.message, 'error'); } finally { document.getElementById('login-loader').style.display = 'none'; }
 }
-async function register(){
-  const name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),password=document.getElementById('reg-password').value;
-  if(!name||!email||!password)return showToast('Please fill all fields','error');
-  try{const data=await apiCall({action:'register',Name:name,Email:email,Password:password});currentUser=data;localStorage.setItem('studyflow_user',JSON.stringify(data));showToast('Account created successfully!');showAppScreen()}catch(e){showToast(e.message,'error')}
+
+async function register() {
+  const name = document.getElementById('reg-name').value.trim(), email = document.getElementById('reg-email').value.trim(), password = document.getElementById('reg-password').value;
+  if (!name || !email || !password) return showToast('Please fill all fields', 'error');
+  try {
+    const data = await apiCall({ action: 'register', Name: name, Email: email, Password: password });
+    currentUser = data; localStorage.setItem('studyflow_user', JSON.stringify(data));
+    showToast('Account created successfully!'); showAppScreen();
+  } catch (e) { showToast(e.message, 'error'); }
 }
-function logout(){localStorage.removeItem('studyflow_user');currentUser=null;appData={tasks:[],courses:[],backlog:[],notifications:[],studySessions:[]};document.getElementById('app-screen').style.display='none';document.getElementById('auth-screen').style.display='flex';showToast('Logged out','info')}
-function showAppScreen(){
-  document.getElementById('auth-screen').style.display='none';
-  document.getElementById('app-screen').style.display='block';
-  const hour=new Date().getHours();const g=hour<12?'Good Morning':hour<18?'Good Afternoon':'Good Evening';
-  const first=(currentUser?.Name||'User').split(' ')[0];
-  document.getElementById('user-greeting').textContent=`${g}, ${first} 👋`;
-  showSection('dashboard');fetchUserData();
+
+function logout() {
+  localStorage.removeItem('studyflow_user'); currentUser = null; appData = { tasks: [], courses: [], backlog: [] };
+  document.getElementById('app-screen').style.display = 'none'; document.getElementById('auth-screen').style.display = 'flex'; showToast('Logged out', 'info');
 }
-function showSection(section){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const target=document.getElementById(`view-${section}`);if(target)target.classList.add('active');
-  document.querySelectorAll('.nav-item[data-section]').forEach(n=>n.classList.toggle('active',n.dataset.section===section));
-  window.scrollTo({top:0,behavior:'smooth'});
+
+// --- Navigation ---
+function showAppScreen() {
+  document.getElementById('auth-screen').style.display = 'none'; document.getElementById('app-screen').style.display = 'block';
+  const hour = new Date().getHours(); const g = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
+  const first = (currentUser?.Name || 'User').split(' ')[0];
+  document.getElementById('user-greeting').textContent = `${g}, ${first} 👋`;
+  showSection('dashboard'); fetchUserData();
 }
-async function fetchUserData(){
-  if(!currentUser?.UserID)return;
-  try{showToast('Refreshing data...','info');const data=await apiCall({action:'getUserData',UserID:currentUser.UserID});appData={...appData,...data};renderAll();showToast('Data synced!')}catch(e){showToast(e.message,'error')}
+
+function showSection(section) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById(`view-${section}`); if (target) target.classList.add('active');
+  document.querySelectorAll('.nav-item[data-section]').forEach(n => n.classList.toggle('active', n.dataset.section === section));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function renderAll(){renderStats();renderDashboard();renderTasks();renderCourses();renderBacklog();renderSchedule()}
-function renderStats(){
-  const todayCourses=appData.courses.filter(c=>isToday(c.Date));
-  const todayTasks=appData.tasks.filter(t=>isToday(t.Date));
-  const remaining=todayTasks.filter(t=>!statusDone(t.Status)).length;
-  const total=todayTasks.length,done=total-todayTasks.filter(t=>!statusDone(t.Status)).length;
-  const progress=total?Math.round(done/total*100):0;
-  document.getElementById('stat-courses').textContent=todayCourses.length;
-  document.getElementById('stat-tasks').textContent=remaining;
-  document.getElementById('stat-backlog').textContent=appData.backlog.filter(b=>!statusDone(b.Status)).length;
-  document.getElementById('stat-progress').textContent=progress+'%';
-  document.getElementById('progress-fill').style.width=progress+'%';
+
+// --- Data Fetching & Rendering ---
+async function fetchUserData() {
+  if (!currentUser?.UserID) return;
+  try {
+    showToast('Refreshing data...', 'info');
+    const data = await apiCall({ action: 'getUserData', UserID: currentUser.UserID });
+    appData = { ...appData, ...data }; renderAll(); showToast('Data synced!');
+  } catch (e) { showToast(e.message, 'error'); }
 }
-function taskItemHtml(task,showActions=true){
-  const done=statusDone(task.Status);const id=escapeHtml(task.TaskID);
-  return `<div class="item" style="${done?'opacity:.65':''}">
-    <div class="item-main"><h3 style="${done?'text-decoration:line-through':''}">${escapeHtml(task.Title)}</h3>
-    <p>${escapeHtml(task.Type||'Task')} • ${escapeHtml(task.Duration||'0')} min ${task.Deadline?`• Due ${escapeHtml(task.Deadline)}`:''}</p></div>
-    <div class="item-actions">${task.Priority?`<span class="badge ${priorityClass(task.Priority)}">${escapeHtml(task.Priority)}</span>`:''}
-    ${showActions?`<input class="check" type="checkbox" ${done?'checked':''} onchange="toggleTask('${id}',this.checked)">`:''}</div>
+
+function renderAll() { renderStats(); renderDashboard(); renderTasks(); renderCourses(); renderBacklog(); renderSchedule(); }
+
+function filterData(arr, filterType) {
+  if (filterType === 'active') return arr.filter(i => !statusDone(i.Status));
+  if (filterType === 'completed') return arr.filter(i => statusDone(i.Status));
+  return arr;
+}
+
+function renderStats() {
+  const todayCourses = appData.courses.filter(c => isToday(c.Date));
+  const todayTasks = appData.tasks.filter(t => isToday(t.Date));
+  const remaining = todayTasks.filter(t => !statusDone(t.Status)).length;
+  const total = todayTasks.length, done = total - remaining;
+  const progress = total ? Math.round(done / total * 100) : (appData.tasks.length===0?0:100);
+  
+  document.getElementById('stat-courses').textContent = todayCourses.length;
+  document.getElementById('stat-tasks').textContent = remaining;
+  document.getElementById('stat-backlog').textContent = appData.backlog.filter(b => !statusDone(b.Status)).length;
+  document.getElementById('stat-progress').textContent = progress + '%';
+  document.getElementById('progress-fill').style.width = progress + '%';
+}
+
+function generateItemHtml(item, type, idField, title, subtitle, badges) {
+  const done = statusDone(item.Status);
+  const id = escapeHtml(item[idField]);
+  const style = done ? 'opacity: 0.6; background: rgba(21, 31, 49, 0.5);' : '';
+  const textStyle = done ? 'text-decoration: line-through; color: var(--muted);' : '';
+  
+  // Sheet info for backend calls
+  const sheetMap = { task: { s: 'Tasks', c: 'TaskID' }, course: { s: 'Courses', c: 'CourseID' }, backlog: { s: 'Backlog', c: 'SessionID' } };
+  const sName = sheetMap[type].s, sCol = sheetMap[type].c;
+
+  return `
+  <div class="item" style="${style}">
+    <div class="item-main">
+      <h3 style="${textStyle}">${escapeHtml(title)}</h3>
+      <p>${escapeHtml(subtitle)}</p>
+    </div>
+    <div class="item-actions">
+      ${badges.map(b => `<span class="badge ${priorityClass(b)}">${escapeHtml(b)}</span>`).join('')}
+      <button class="action-btn edit" onclick="openEdit('${type}', '${id}')"><i class="fas fa-pencil-alt"></i></button>
+      <button class="action-btn del" onclick="confirmDelete('${type}', '${id}', '${sName}', '${sCol}')"><i class="fas fa-trash"></i></button>
+      <input class="check" type="checkbox" ${done ? 'checked' : ''} onchange="toggleStatus('${type}', '${id}', this.checked, '${sName}', '${sCol}')">
+    </div>
   </div>`;
 }
-function renderDashboard(){
-  const todayTasks=appData.tasks.filter(t=>isToday(t.Date)).sort((a,b)=>Number(a.Deadline?.replace(':','')||9999)-Number(b.Deadline?.replace(':','')||9999));
-  const list=document.getElementById('dashboard-list');list.innerHTML=todayTasks.length?todayTasks.slice(0,5).map(taskItemHtml).join(''):`<div class="empty">Your day is clear! Add tasks, courses or backlog sessions.</div>`;
+
+function renderDashboard() {
+  const todayTasks = appData.tasks.filter(t => isToday(t.Date)).sort((a, b) => Number(a.Deadline?.replace(':', '') || 9999) - Number(b.Deadline?.replace(':', '') || 9999));
+  const list = document.getElementById('dashboard-list');
+  list.innerHTML = todayTasks.length ? todayTasks.slice(0, 5).map(t => generateItemHtml(t, 'task', 'TaskID', t.Title, `${t.Type} • ${t.Duration} min ${t.Deadline?`• Due ${t.Deadline}`:''}`, [t.Priority])).join('') : `<div class="empty">Your day is clear! Add tasks or courses.</div>`;
 }
-function renderTasks(){
-  const list=document.getElementById('tasks-list');
-  list.innerHTML=appData.tasks.length?appData.tasks.slice().reverse().map(taskItemHtml).join(''):`<div class="empty">No tasks yet. Click “+ Add Task”.</div>`;
+
+function renderTasks() {
+  const filter = document.getElementById('filter-tasks').value;
+  const filtered = filterData(appData.tasks, filter);
+  const list = document.getElementById('tasks-list');
+  list.innerHTML = filtered.length ? filtered.slice().reverse().map(t => generateItemHtml(t, 'task', 'TaskID', t.Title, `${t.Type} • ${t.Duration} min ${t.Deadline?`• Due ${t.Deadline}`:''}`, [t.Priority])).join('') : `<div class="empty">No tasks found.</div>`;
 }
-function renderCourses(){
-  const list=document.getElementById('courses-list');
-  list.innerHTML=appData.courses.length?appData.courses.slice().sort((a,b)=>`${a.Date} ${a.StartTime}`.localeCompare(`${b.Date} ${b.StartTime}`)).map(c=>`
-  <div class="item"><div class="item-main"><h3>${escapeHtml(c.CourseName)}</h3><p>${escapeHtml(formatDate(c.Date))} • ${escapeHtml(c.StartTime||'')} - ${escapeHtml(c.EndTime||'')}</p></div>
-  <div class="item-actions"><span class="badge">${escapeHtml(c.Status||'Not Completed')}</span></div></div>`).join(''):`<div class="empty">No courses yet. Click “+ Add Course”.</div>`;
+
+function renderCourses() {
+  const filter = document.getElementById('filter-courses').value;
+  const filtered = filterData(appData.courses, filter).sort((a,b)=>`${a.Date} ${a.StartTime}`.localeCompare(`${b.Date} ${b.StartTime}`));
+  const list = document.getElementById('courses-list');
+  list.innerHTML = filtered.length ? filtered.map(c => generateItemHtml(c, 'course', 'CourseID', c.CourseName, `${formatDate(c.Date)} • ${c.StartTime} - ${c.EndTime}`, [])).join('') : `<div class="empty">No courses found.</div>`;
 }
-function renderBacklog(){
-  const list=document.getElementById('backlog-list');
-  list.innerHTML=appData.backlog.length?appData.backlog.map(b=>`
-  <div class="item"><div class="item-main"><h3>${escapeHtml(b.SessionName)}</h3><p>${escapeHtml(b.Subject||'')} • ${escapeHtml(b.Duration||'0')} min</p></div>
-  <div class="item-actions"><span class="badge ${priorityClass(b.Priority)}">${escapeHtml(b.Priority||'Medium')}</span></div></div>`).join(''):`<div class="empty">No backlog sessions. Great!</div>`;
+
+function renderBacklog() {
+  const filter = document.getElementById('filter-backlog').value;
+  const filtered = filterData(appData.backlog, filter);
+  const list = document.getElementById('backlog-list');
+  list.innerHTML = filtered.length ? filtered.map(b => generateItemHtml(b, 'backlog', 'SessionID', b.SessionName, `${b.Subject} • ${b.Duration} min`, [b.Priority])).join('') : `<div class="empty">No backlog sessions.</div>`;
 }
-function renderSchedule(){
-  const list=document.getElementById('schedule-list');
-  const rows=[];
-  appData.courses.filter(c=>isToday(c.Date)).forEach(c=>rows.push({time:c.StartTime||'',title:c.CourseName,meta:`Course • ${c.StartTime||''}-${c.EndTime||''}`,icon:'📚'}));
-  appData.tasks.filter(t=>isToday(t.Date)).forEach(t=>rows.push({time:t.Deadline||'23:59',title:t.Title,meta:`${t.Type||'Task'} • ${t.Duration||0} min`,icon:'📝'}));
-  rows.sort((a,b)=>a.time.localeCompare(b.time));
-  list.innerHTML=rows.length?rows.map(r=>`<div class="item"><div class="item-main"><h3>${r.icon} ${escapeHtml(r.title)}</h3><p>${escapeHtml(r.meta)}</p></div><span class="badge">${escapeHtml(r.time||'Any time')}</span></div>`).join(''):`<div class="empty">Nothing scheduled for today.</div>`;
+
+function renderSchedule() {
+  const list = document.getElementById('schedule-list'); const rows = [];
+  appData.courses.filter(c => isToday(c.Date) && !statusDone(c.Status)).forEach(c => rows.push({ time: c.StartTime || '', title: c.CourseName, meta: `Course • ${c.StartTime}-${c.EndTime}`, icon: '📚' }));
+  appData.tasks.filter(t => isToday(t.Date) && !statusDone(t.Status)).forEach(t => rows.push({ time: t.Deadline || '23:59', title: t.Title, meta: `${t.Type} • ${t.Duration} min`, icon: '📝' }));
+  rows.sort((a, b) => a.time.localeCompare(b.time));
+  list.innerHTML = rows.length ? rows.map(r => `<div class="item"><div class="item-main"><h3>${r.icon} ${escapeHtml(r.title)}</h3><p>${escapeHtml(r.meta)}</p></div><span class="badge">${escapeHtml(r.time || 'Any time')}</span></div>`).join('') : `<div class="empty">Nothing active scheduled for today.</div>`;
 }
-async function toggleTask(taskId,checked){
-  try{await apiCall({action:'updateStatus',sheetName:'Tasks',idColumnName:'TaskID',recordId:taskId,newStatus:checked?'Completed':'Not Completed'});const task=appData.tasks.find(t=>t.TaskID===taskId);if(task)task.Status=checked?'Completed':'Not Completed';renderAll();showToast(checked?'Task completed ✅':'Task marked as not completed','success')}catch(e){showToast(e.message,'error');renderAll()}
+
+// --- Status (Complete/Undo) ---
+async function toggleStatus(type, id, checked, sheetName, idCol) {
+  const newStatus = checked ? 'Completed' : 'Not Completed';
+  try {
+    // Update locally instantly for snappy UI
+    let arr = type === 'task' ? appData.tasks : (type === 'course' ? appData.courses : appData.backlog);
+    const item = arr.find(i => i[idCol] === id);
+    if(item) item.Status = newStatus;
+    renderAll(); 
+    showToast(checked ? 'Item completed ✅' : 'Item marked active', 'success');
+    
+    // Background sync to server
+    await apiCall({ action: 'updateStatus', sheetName: sheetName, idColumnName: idCol, recordId: id, newStatus: newStatus });
+  } catch (e) {
+    showToast('Failed to update server. Refreshing...', 'error');
+    fetchUserData(); // rollback on failure
+  }
 }
-function openModal(type){
+
+// --- Delete Logic ---
+function confirmDelete(type, id, sheetName, idCol) {
+  let arrName = type === 'task' ? 'tasks' : (type === 'course' ? 'courses' : 'backlog');
+  deleteState = { type, id, sheetName, idCol, arrName };
+  document.getElementById('modal-confirm').classList.add('open');
+}
+
+async function executeDelete() {
+  closeModal('confirm');
+  showToast('Deleting...', 'info');
+  const { id, sheetName, idCol, arrName } = deleteState;
+  try {
+    // Optimistic UI Update
+    appData[arrName] = appData[arrName].filter(i => i[idCol] !== id);
+    renderAll();
+    
+    // Call server API (Ensure your Apps Script has a 'deleteRecord' case!)
+    await apiCall({ action: 'deleteRecord', sheetName: sheetName, idColumnName: idCol, recordId: id });
+    showToast('Deleted successfully! 🗑️');
+  } catch (e) {
+    showToast('Error deleting item', 'error');
+    fetchUserData(); // Rollback
+  }
+}
+
+// --- Modals (Add / Edit) ---
+function openModal(type) {
+  editState = { type: null, id: null }; // Reset to Add mode
+  document.getElementById(`title-modal-${type}`).innerHTML = `➕ Add ${type}`;
+  document.getElementById(`btn-submit-${type}`).innerText = 'Add';
   document.getElementById(`modal-${type}`).classList.add('open');
-  if(type==='task')document.getElementById('task-date').value=todayISO();
-  if(type==='course')document.getElementById('course-date').value=todayISO();
+  
+  // Clear inputs
+  document.querySelectorAll(`#modal-${type} input[type="text"], #modal-${type} input[type="time"]`).forEach(i => i.value = '');
+  if (type === 'task' || type === 'course') document.getElementById(`${type}-date`).value = todayISO();
+  if (type === 'task') document.getElementById('task-duration').value = 30;
+  if (type === 'backlog') document.getElementById('backlog-duration').value = 60;
 }
-function closeModal(type){document.getElementById(`modal-${type}`).classList.remove('open')}
-async function submitTask(){
-  const payload={action:'addTask',UserID:currentUser.UserID,Title:document.getElementById('task-title').value.trim(),Type:document.getElementById('task-type').value,Date:document.getElementById('task-date').value||todayISO(),Duration:document.getElementById('task-duration').value||30,Priority:document.getElementById('task-priority').value,Deadline:document.getElementById('task-deadline').value};
-  if(!payload.Title)return showToast('Enter a task name','error');
-  try{await apiCall(payload);closeModal('task');document.getElementById('task-title').value='';await fetchUserData();showSection('tasks');showToast('Task added ✅')}catch(e){showToast(e.message,'error')}
+
+function openEdit(type, id) {
+  editState = { type: type, id: id };
+  document.getElementById(`title-modal-${type}`).innerHTML = `✏️ Edit ${type}`;
+  document.getElementById(`btn-submit-${type}`).innerText = 'Save Changes';
+  
+  // Populate Fields
+  if(type === 'task') {
+    const t = appData.tasks.find(x => x.TaskID === id);
+    if(t) {
+      document.getElementById('task-title').value = t.Title;
+      document.getElementById('task-type').value = t.Type;
+      document.getElementById('task-date').value = t.Date ? t.Date.slice(0,10) : '';
+      document.getElementById('task-duration').value = t.Duration;
+      document.getElementById('task-priority').value = t.Priority;
+      document.getElementById('task-deadline').value = t.Deadline;
+    }
+  } else if (type === 'course') {
+    const c = appData.courses.find(x => x.CourseID === id);
+    if(c) {
+      document.getElementById('course-name').value = c.CourseName;
+      document.getElementById('course-date').value = c.Date ? c.Date.slice(0,10) : '';
+      document.getElementById('course-start').value = c.StartTime;
+      document.getElementById('course-end').value = c.EndTime;
+    }
+  } else if (type === 'backlog') {
+    const b = appData.backlog.find(x => x.SessionID === id);
+    if(b) {
+      document.getElementById('backlog-name').value = b.SessionName;
+      document.getElementById('backlog-subject').value = b.Subject;
+      document.getElementById('backlog-duration').value = b.Duration;
+      document.getElementById('backlog-priority').value = b.Priority;
+    }
+  }
+  document.getElementById(`modal-${type}`).classList.add('open');
 }
-async function submitCourse(){
-  const payload={action:'addCourse',UserID:currentUser.UserID,CourseName:document.getElementById('course-name').value.trim(),Date:document.getElementById('course-date').value||todayISO(),StartTime:document.getElementById('course-start').value,EndTime:document.getElementById('course-end').value};
-  if(!payload.CourseName)return showToast('Enter a course name','error');
-  try{await apiCall(payload);closeModal('course');document.getElementById('course-name').value='';await fetchUserData();showSection('courses');showToast('Course added ✅')}catch(e){showToast(e.message,'error')}
+
+function closeModal(type) { document.getElementById(`modal-${type}`).classList.remove('open'); }
+
+// --- Submissions (Create / Update) ---
+async function submitTask() {
+  const isEdit = editState.type === 'task';
+  const payload = { 
+    action: isEdit ? 'updateTask' : 'addTask', 
+    UserID: currentUser.UserID, 
+    TaskID: isEdit ? editState.id : undefined,
+    Title: document.getElementById('task-title').value.trim(), 
+    Type: document.getElementById('task-type').value, 
+    Date: document.getElementById('task-date').value || todayISO(), 
+    Duration: document.getElementById('task-duration').value || 30, 
+    Priority: document.getElementById('task-priority').value, 
+    Deadline: document.getElementById('task-deadline').value 
+  };
+  if (!payload.Title) return showToast('Enter a task name', 'error');
+  try { showToast('Saving...', 'info'); await apiCall(payload); closeModal('task'); await fetchUserData(); showSection('tasks'); showToast(isEdit ? 'Updated successfully ✏️' : 'Task added ✅'); } catch (e) { showToast(e.message, 'error'); }
 }
-async function submitBacklog(){
-  const payload={action:'addBacklog',UserID:currentUser.UserID,SessionName:document.getElementById('backlog-name').value.trim(),Subject:document.getElementById('backlog-subject').value.trim(),Duration:document.getElementById('backlog-duration').value||60,Priority:document.getElementById('backlog-priority').value};
-  if(!payload.SessionName)return showToast('Enter a session name','error');
-  try{await apiCall(payload);closeModal('backlog');document.getElementById('backlog-name').value='';await fetchUserData();showSection('backlog');showToast('Backlog session added ✅')}catch(e){showToast(e.message,'error')}
+
+async function submitCourse() {
+  const isEdit = editState.type === 'course';
+  const payload = { 
+    action: isEdit ? 'updateCourse' : 'addCourse', 
+    UserID: currentUser.UserID, 
+    CourseID: isEdit ? editState.id : undefined,
+    CourseName: document.getElementById('course-name').value.trim(), 
+    Date: document.getElementById('course-date').value || todayISO(), 
+    StartTime: document.getElementById('course-start').value, 
+    EndTime: document.getElementById('course-end').value 
+  };
+  if (!payload.CourseName) return showToast('Enter a course name', 'error');
+  try { showToast('Saving...', 'info'); await apiCall(payload); closeModal('course'); await fetchUserData(); showSection('courses'); showToast(isEdit ? 'Updated successfully ✏️' : 'Course added ✅'); } catch (e) { showToast(e.message, 'error'); }
 }
-function showToast(message,type='success'){const t=document.getElementById('toast');t.textContent=message;t.className=`toast show ${type==='error'?'error':type==='info'?'info':''}`;clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),3200)}
-document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+
+async function submitBacklog() {
+  const isEdit = editState.type === 'backlog';
+  const payload = { 
+    action: isEdit ? 'updateBacklog' : 'addBacklog', 
+    UserID: currentUser.UserID, 
+    SessionID: isEdit ? editState.id : undefined,
+    SessionName: document.getElementById('backlog-name').value.trim(), 
+    Subject: document.getElementById('backlog-subject').value.trim(), 
+    Duration: document.getElementById('backlog-duration').value || 60, 
+    Priority: document.getElementById('backlog-priority').value 
+  };
+  if (!payload.SessionName) return showToast('Enter a session name', 'error');
+  try { showToast('Saving...', 'info'); await apiCall(payload); closeModal('backlog'); await fetchUserData(); showSection('backlog'); showToast(isEdit ? 'Updated successfully ✏️' : 'Session added ✅'); } catch (e) { showToast(e.message, 'error'); }
+}
+
+function showToast(message, type = 'success') { const t = document.getElementById('toast'); t.textContent = message; t.className = `toast show ${type === 'error' ? 'error' : type === 'info' ? 'info' : ''}`; clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => t.classList.remove('show'), 3000); }
 </script>
 </body>
 </html>
