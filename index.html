@@ -1,413 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyFlow - Smart Planner</title>
-    <!-- استدعاء خطوط وأيقونات حديثة -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* ===== متغيرات الألوان والتصميم ===== */
-        :root {
-            --bg-dark: #0B1120;
-            --card-bg: #1E293B;
-            --primary: #8B5CF6; /* Electric Purple */
-            --secondary: #06B6D4; /* Cyan */
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
-            --success: #10B981;
-            --danger: #EF4444;
-            --border: rgba(255, 255, 255, 0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            overflow-x: hidden;
-        }
-
-        /* ===== شاشة تسجيل الدخول ===== */
-        #auth-screen {
-            width: 100vw; height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-            background: radial-gradient(circle at top left, #1e1b4b, var(--bg-dark));
-            position: fixed; top: 0; left: 0; z-index: 1000;
-        }
-
-        .auth-card {
-            background: var(--card-bg);
-            padding: 40px; border-radius: 20px;
-            width: 100%; max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-
-        .auth-card h2 { margin-bottom: 20px; font-weight: 600; }
-        .auth-card h2 span { color: var(--secondary); }
-
-        .input-group { margin-bottom: 15px; text-align: left; }
-        .input-group label { display: block; font-size: 14px; margin-bottom: 5px; color: var(--text-muted); }
-        .input-group input {
-            width: 100%; padding: 12px;
-            background: rgba(0,0,0,0.2); border: 1px solid var(--border);
-            border-radius: 8px; color: white; outline: none;
-            transition: 0.3s;
-        }
-        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
-
-        .btn {
-            width: 100%; padding: 12px; border: none; border-radius: 8px;
-            font-weight: 600; cursor: pointer; transition: 0.3s;
-            margin-top: 10px;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-        
-        .switch-auth { margin-top: 20px; font-size: 14px; color: var(--text-muted); cursor: pointer; }
-        .switch-auth span { color: var(--secondary); text-decoration: underline; }
-
-        /* ===== التطبيق الرئيسي ===== */
-        #app-screen { display: none; width: 100%; }
-
-        /* القائمة الجانبية */
-        .sidebar {
-            width: 250px; background: var(--card-bg);
-            border-right: 1px solid var(--border);
-            padding: 20px; display: flex; flex-direction: column;
-        }
-        .logo { font-size: 24px; font-weight: 700; margin-bottom: 40px; color: var(--text-main); }
-        .logo span { color: var(--secondary); }
-        
-        .nav-item {
-            padding: 12px 15px; margin-bottom: 10px;
-            border-radius: 10px; cursor: pointer;
-            color: var(--text-muted); display: flex; align-items: center; gap: 15px;
-            transition: 0.3s;
-        }
-        .nav-item:hover, .nav-item.active {
-            background: rgba(139, 92, 246, 0.1); color: var(--secondary);
-        }
-
-        /* المحتوى الرئيسي */
-        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
-        
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .greeting h1 { font-size: 28px; font-weight: 600; }
-        .greeting p { color: var(--text-muted); font-size: 14px; }
-        
-        .header-actions { display: flex; gap: 15px; }
-        .btn-add {
-            background: var(--primary); color: white; padding: 10px 20px;
-            border-radius: 8px; cursor: pointer; border: none; font-weight: 500;
-        }
-
-        /* بطاقات الإحصائيات */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card {
-            background: var(--card-bg); padding: 20px; border-radius: 15px;
-            border: 1px solid var(--border); display: flex; align-items: center; gap: 15px;
-        }
-        .stat-icon {
-            width: 50px; height: 50px; border-radius: 12px;
-            display: flex; justify-content: center; align-items: center; font-size: 20px;
-        }
-        .icon-blue { background: rgba(6, 182, 212, 0.2); color: var(--secondary); }
-        .icon-purple { background: rgba(139, 92, 246, 0.2); color: var(--primary); }
-        .stat-info h3 { font-size: 24px; }
-        .stat-info p { color: var(--text-muted); font-size: 13px; }
-
-        /* التوجيه الذكي (NOW, NEXT, LATER) */
-        .smart-planner { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border); }
-        .smart-planner h2 { margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .task-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
-        .task-row.now { border-left-color: var(--danger); background: rgba(239, 68, 68, 0.1); }
-        .task-row.next { border-left-color: var(--secondary); }
-
-        /* Loader & Toast */
-        #loader { display: none; margin-top: 15px; color: var(--secondary); font-size: 14px; }
-        .toast {
-            position: fixed; bottom: 20px; right: 20px; background: var(--card-bg);
-            color: white; padding: 15px 25px; border-radius: 8px; border-left: 4px solid var(--success);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateX(150%);
-            transition: 0.3s; z-index: 9999;
-        }
-        .toast.show { transform: translateX(0); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyFlow - Smart Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#0b1120;--card:#1e293b;--card2:#172033;--primary:#8b5cf6;--secondary:#06b6d4;--text:#f8fafc;--muted:#94a3b8;--success:#10b981;--danger:#ef4444;--warning:#f59e0b;--border:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Poppins,sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.auth-screen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at top left,#1e1b4b,var(--bg));padding:20px}
+.auth-card{background:var(--card);width:100%;max-width:420px;padding:36px;border-radius:22px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.auth-card h2{text-align:center;margin-bottom:8px}.auth-card h2 span{color:var(--secondary)}
+.auth-sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
+.input-group{margin-bottom:14px}.input-group label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}
+.input-group input,.input-group select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid var(--border);background:#121b2b;color:var(--text);outline:none}
+.input-group input:focus,.input-group select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(139,92,246,.15)}
+.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:600;transition:.2s}
+.btn:hover{transform:translateY(-1px)}.btn-primary{width:100%;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}.btn-secondary{background:#243148;color:#fff;border:1px solid var(--border)}.btn-danger{background:rgba(239,68,68,.15);color:#fecaca}.btn-success{background:rgba(16,185,129,.15);color:#a7f3d0}
+.switch-auth{text-align:center;margin-top:18px;color:var(--muted);font-size:13px;cursor:pointer}.switch-auth span{color:var(--secondary);text-decoration:underline}
+#app-screen{display:none;min-height:100vh}.layout{display:flex;min-height:100vh}
+.sidebar{width:250px;background:#1d293d;border-right:1px solid var(--border);padding:20px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.logo{font-size:24px;font-weight:700;margin-bottom:34px}.logo span{color:var(--secondary)}
+.nav-item{padding:12px 14px;margin-bottom:8px;border-radius:10px;color:var(--muted);display:flex;align-items:center;gap:14px;transition:.2s;cursor:pointer}
+.nav-item:hover,.nav-item.active{background:rgba(139,92,246,.12);color:var(--secondary)}.nav-item i{width:18px;text-align:center}
+.main{flex:1;padding:30px;min-width:0}.header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:24px}.greeting h1{font-size:28px}.greeting p{color:var(--muted);font-size:14px;margin-top:2px}.header-actions{display:flex;gap:10px;flex-wrap:wrap}.top-btn{padding:10px 16px;border-radius:10px;border:0;color:#fff;font-weight:600}.add-btn{background:var(--primary)}.refresh-btn{background:var(--secondary)}
+.view{display:none}.view.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:16px;margin-bottom:22px}.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;gap:14px;align-items:center}.stat-icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:19px}.blue{background:rgba(6,182,212,.18);color:var(--secondary)}.purple{background:rgba(139,92,246,.18);color:#c4b5fd}.red{background:rgba(239,68,68,.18);color:#fca5a5}.green{background:rgba(16,185,129,.18);color:#6ee7b7}.stat h3{font-size:23px}.stat p{font-size:12px;color:var(--muted)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.panel-title h2{font-size:18px}.panel-title p{font-size:12px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:10px}.item{background:#151f31;border:1px solid rgba(255,255,255,.06);padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:15px}.item-main{min-width:0}.item-main h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-main p{font-size:12px;color:var(--muted);margin-top:4px}.item-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.badge{font-size:10px;padding:4px 8px;border-radius:999px;background:rgba(139,92,246,.16);color:#d8b4fe}.badge.high{background:rgba(239,68,68,.16);color:#fecaca}.badge.medium{background:rgba(245,158,11,.16);color:#fde68a}.badge.low{background:rgba(16,185,129,.16);color:#a7f3d0}.check{width:20px;height:20px;accent-color:var(--success)}
+.empty{padding:28px;text-align:center;color:var(--muted);font-size:14px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.section-tools{display:flex;gap:8px;flex-wrap:wrap}
+.small-btn{border:1px solid var(--border);background:#243148;color:#fff;padding:8px 11px;border-radius:8px;font-size:12px}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:12px;border-bottom:1px solid var(--border);font-size:12px}.table th{color:var(--muted);font-weight:500}
+.progress-wrap{margin-top:16px}.progress-bar{height:10px;border-radius:999px;background:#0e1726;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary));width:0;transition:.35s}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,6,23,.72);backdrop-filter:blur(4px);z-index:2000;align-items:center;justify-content:center;padding:20px}.modal-backdrop.open{display:flex}.modal{width:100%;max-width:520px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 25px 70px rgba(0,0,0,.55)}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.modal-head h3{font-size:18px}.close{background:none;border:0;color:var(--muted);font-size:22px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-full{grid-column:1/-1}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.toast{position:fixed;right:20px;bottom:20px;transform:translateX(150%);transition:.25s;z-index:3000;background:var(--card);padding:14px 18px;border-radius:10px;border-left:4px solid var(--success);box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:360px}.toast.show{transform:translateX(0)}.toast.error{border-left-color:var(--danger)}.toast.info{border-left-color:var(--secondary)}
+.mobile-top{display:none}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.sidebar{width:220px}}
+@media(max-width:700px){.layout{display:block}.sidebar{position:fixed;left:0;bottom:0;top:auto;width:100%;height:auto;z-index:1500;padding:8px 8px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;border-top:1px solid var(--border);border-right:0}.logo,.sidebar .logout-item{display:none}.nav-item{margin:0;padding:8px 4px;justify-content:center;flex-direction:column;gap:3px;font-size:10px}.main{padding:18px 14px 88px}.header{align-items:flex-start;flex-direction:column}.header-actions{width:100%}.top-btn{flex:1}.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}}
+</style>
 </head>
 <body>
 
-    <!-- التنبيهات (Toast) -->
-    <div id="toast" class="toast">Message here</div>
+<div id="toast" class="toast"></div>
 
-    <!-- شاشة المصادقة (تسجيل / دخول) -->
-    <div id="auth-screen">
-        <!-- تسجيل الدخول -->
-        <div class="auth-card" id="login-form">
-            <h2>Welcome to <span>StudyFlow</span></h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Plan. Study. Work. Complete.</p>
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="login-email" placeholder="example@mail.com">
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="login-password" placeholder="••••••••">
-            </div>
-            <button class="btn btn-primary" onclick="login()">Login</button>
-            <div id="login-loader" id="loader">Loading... Please wait.</div>
-            <p class="switch-auth" onclick="toggleAuth()">Don't have an account? <span>Create one</span></p>
-        </div>
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card" id="login-form">
+    <h2>Welcome to <span>StudyFlow</span></h2>
+    <p class="auth-sub">Plan. Study. Work. Complete.</p>
+    <div class="input-group"><label>Email</label><input id="login-email" type="email" placeholder="example@mail.com"></div>
+    <div class="input-group"><label>Password</label><input id="login-password" type="password" placeholder="••••••••"></div>
+    <button class="btn btn-primary" onclick="login()">Login</button>
+    <p id="login-loader" class="auth-sub" style="display:none;margin-top:12px">Loading...</p>
+    <p class="switch-auth" onclick="toggleAuth()">Don't have an account? <span>Create one</span></p>
+  </div>
 
-        <!-- إنشاء حساب -->
-        <div class="auth-card" id="register-form" style="display: none;">
-            <h2>Create <span>Account</span></h2>
-            <div class="input-group">
-                <label>Name</label>
-                <input type="text" id="reg-name" placeholder="John Doe">
-            </div>
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="reg-email" placeholder="example@mail.com">
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="reg-password" placeholder="••••••••">
-            </div>
-            <button class="btn btn-primary" onclick="register()">Create Account</button>
-            <p class="switch-auth" onclick="toggleAuth()">Already have an account? <span>Login</span></p>
+  <div class="auth-card" id="register-form" style="display:none">
+    <h2>Create <span>Account</span></h2>
+    <p class="auth-sub">Create your personal StudyFlow account.</p>
+    <div class="input-group"><label>Name</label><input id="reg-name" type="text" placeholder="John Doe"></div>
+    <div class="input-group"><label>Email</label><input id="reg-email" type="email" placeholder="example@mail.com"></div>
+    <div class="input-group"><label>Password</label><input id="reg-password" type="password" placeholder="••••••••"></div>
+    <button class="btn btn-primary" onclick="register()">Create Account</button>
+    <p class="switch-auth" onclick="toggleAuth()">Already have an account? <span>Login</span></p>
+  </div>
+</div>
+
+<div id="app-screen">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">Study<span>Flow</span></div>
+      <div class="nav-item active" data-section="dashboard" onclick="showSection('dashboard')"><i class="fas fa-home"></i><span>Dashboard</span></div>
+      <div class="nav-item" data-section="schedule" onclick="showSection('schedule')"><i class="fas fa-calendar-alt"></i><span>Schedule</span></div>
+      <div class="nav-item" data-section="courses" onclick="showSection('courses')"><i class="fas fa-book"></i><span>Courses</span></div>
+      <div class="nav-item" data-section="tasks" onclick="showSection('tasks')"><i class="fas fa-tasks"></i><span>Tasks</span></div>
+      <div class="nav-item" data-section="backlog" onclick="showSection('backlog')"><i class="fas fa-history"></i><span>Backlog</span></div>
+      <div class="nav-item logout-item" onclick="logout()" style="margin-top:auto"><i class="fas fa-sign-out-alt"></i><span>Logout</span></div>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div class="greeting">
+          <h1 id="user-greeting">Good Morning, User 👋</h1>
+          <p id="current-date"></p>
         </div>
+        <div class="header-actions">
+          <button class="top-btn add-btn" onclick="openModal('task')"><i class="fas fa-plus"></i> Add Task</button>
+          <button class="top-btn refresh-btn" onclick="fetchUserData()"><i class="fas fa-sync"></i> Refresh Data</button>
+        </div>
+      </div>
+
+      <section class="view active" id="view-dashboard">
+        <div class="stats">
+          <div class="stat"><div class="stat-icon blue"><i class="fas fa-book-open"></i></div><div><h3 id="stat-courses">0</h3><p>Courses Today</p></div></div>
+          <div class="stat"><div class="stat-icon purple"><i class="fas fa-check-circle"></i></div><div><h3 id="stat-tasks">0</h3><p>Tasks Remaining</p></div></div>
+          <div class="stat"><div class="stat-icon red"><i class="fas fa-archive"></i></div><div><h3 id="stat-backlog">0</h3><p>Backlog Sessions</p></div></div>
+          <div class="stat"><div class="stat-icon green"><i class="fas fa-chart-line"></i></div><div><h3 id="stat-progress">0%</h3><p>Today's Progress</p></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><div><h2>⚡ Smart Daily Planner</h2><p>Your important items for today.</p></div><button class="small-btn" onclick="showSection('tasks')">View all tasks</button></div>
+          <div id="dashboard-list" class="list"></div>
+          <div class="progress-wrap"><div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-schedule">
+        <div class="panel">
+          <div class="panel-title"><div><h2>📅 Today's Schedule</h2><p>Courses and tasks sorted by time.</p></div></div>
+          <div id="schedule-list" class="list"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-courses">
+        <div class="panel">
+          <div class="panel-title"><div><h2>📚 Courses</h2><p>Manage your daily and upcoming courses.</p></div><button class="small-btn" onclick="openModal('course')">+ Add Course</button></div>
+          <div id="courses-list" class="list"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-tasks">
+        <div class="panel">
+          <div class="panel-title"><div><h2>📝 Tasks</h2><p>Homework, work and study tasks.</p></div><button class="small-btn" onclick="openModal('task')">+ Add Task</button></div>
+          <div id="tasks-list" class="list"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-backlog">
+        <div class="panel">
+          <div class="panel-title"><div><h2>🔄 Backlog</h2><p>Sessions that still need to be studied.</p></div><button class="small-btn" onclick="openModal('backlog')">+ Add Session</button></div>
+          <div id="backlog-list" class="list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="modal-task" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head"><h3>➕ Add New Task</h3><button class="close" onclick="closeModal('task')">&times;</button></div>
+    <div class="form-grid">
+      <div class="input-group form-full"><label>Task Name</label><input id="task-title" type="text" placeholder="e.g. Math Homework"></div>
+      <div class="input-group"><label>Type</label><select id="task-type"><option>Homework</option><option>Work</option><option>Study</option><option>Other</option></select></div>
+      <div class="input-group"><label>Date</label><input id="task-date" type="date"></div>
+      <div class="input-group"><label>Duration (minutes)</label><input id="task-duration" type="number" min="1" value="30"></div>
+      <div class="input-group"><label>Priority</label><select id="task-priority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+      <div class="input-group"><label>Deadline</label><input id="task-deadline" type="time"></div>
     </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('task')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitTask()">Add Task</button></div>
+  </div>
+</div>
 
-    <!-- التطبيق الرئيسي -->
-    <div id="app-screen">
-        <!-- القائمة الجانبية -->
-        <div class="sidebar">
-            <div class="logo">Study<span>Flow</span></div>
-            <div class="nav-item active"><i class="fas fa-home"></i> Dashboard</div>
-            <div class="nav-item"><i class="fas fa-calendar-alt"></i> Schedule</div>
-            <div class="nav-item"><i class="fas fa-book"></i> Courses</div>
-            <div class="nav-item"><i class="fas fa-tasks"></i> Tasks</div>
-            <div class="nav-item"><i class="fas fa-history"></i> Backlog</div>
-            <div style="margin-top: auto;" class="nav-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
-        </div>
-
-        <!-- المحتوى الرئيسي -->
-        <div class="main-content">
-            <div class="header">
-                <div class="greeting">
-                    <h1 id="user-greeting">Good Morning, User 👋</h1>
-                    <p id="current-date">Wednesday, August 12, 2026</p>
-                </div>
-                <div class="header-actions">
-                    <button class="btn-add" onclick="showToast('Add Task Modal Coming Soon!', 'info')"><i class="fas fa-plus"></i> Add Task</button>
-                    <button class="btn-add" style="background: var(--secondary);" onclick="fetchUserData()"><i class="fas fa-sync"></i> Refresh Data</button>
-                </div>
-            </div>
-
-            <!-- الإحصائيات -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon icon-blue"><i class="fas fa-book-open"></i></div>
-                    <div class="stat-info">
-                        <h3 id="stat-courses">0</h3>
-                        <p>Courses Today</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon icon-purple"><i class="fas fa-check-circle"></i></div>
-                    <div class="stat-info">
-                        <h3 id="stat-tasks">0</h3>
-                        <p>Tasks Remaining</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon icon-blue" style="background: rgba(239, 68, 68, 0.2); color: var(--danger);"><i class="fas fa-archive"></i></div>
-                    <div class="stat-info">
-                        <h3 id="stat-backlog">0</h3>
-                        <p>Backlog Sessions</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- التخطيط الذكي -->
-            <div class="smart-planner">
-                <h2>⚡ Smart Daily Planner</h2>
-                <div id="tasks-container">
-                    <p style="color: var(--text-muted); text-align: center; padding: 20px;">No tasks loaded yet. Add tasks or click Refresh.</p>
-                </div>
-            </div>
-        </div>
+<div id="modal-course" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head"><h3>📚 Add Course</h3><button class="close" onclick="closeModal('course')">&times;</button></div>
+    <div class="form-grid">
+      <div class="input-group form-full"><label>Course Name</label><input id="course-name" type="text" placeholder="e.g. Physics"></div>
+      <div class="input-group"><label>Date</label><input id="course-date" type="date"></div>
+      <div class="input-group"><label>Start Time</label><input id="course-start" type="time"></div>
+      <div class="input-group"><label>End Time</label><input id="course-end" type="time"></div>
     </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('course')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitCourse()">Add Course</button></div>
+  </div>
+</div>
 
-    <!-- ===== JavaScript ===== -->
-    <script>
-        // رابط الـ API الخاص بك الذي قمت بإنشائه في Google Apps Script
-        const API_URL = 'https://script.google.com/macros/s/AKfycbyuoq6mfXuA26qnGpLOIpZvWa_DV8nOKh4giFvvuPznBoj28F7aEt8Kb4DWMv2A0jmY0A/exec';
-        
-        let currentUser = JSON.parse(localStorage.getItem('studyflow_user'));
+<div id="modal-backlog" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head"><h3>🔄 Add Backlog Session</h3><button class="close" onclick="closeModal('backlog')">&times;</button></div>
+    <div class="form-grid">
+      <div class="input-group form-full"><label>Session Name</label><input id="backlog-name" type="text" placeholder="e.g. SAT Math Session 4"></div>
+      <div class="input-group"><label>Subject</label><input id="backlog-subject" type="text" placeholder="Math"></div>
+      <div class="input-group"><label>Duration (minutes)</label><input id="backlog-duration" type="number" min="1" value="60"></div>
+      <div class="input-group"><label>Priority</label><select id="backlog-priority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+    </div>
+    <div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('backlog')">Cancel</button><button class="btn btn-primary" style="width:auto" onclick="submitBacklog()">Add Session</button></div>
+  </div>
+</div>
 
-        // إعداد التاريخ الحالي في الهيدر
-        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', dateOptions);
+<script>
+const API_URL='https://script.google.com/macros/s/AKfycbxFtCp8yDiOYl_D10f5IroUerCxVZ2A2ZiPK1S3vv7zFaRzAMfPf_Tf0AUMbeAlgTd2Ug/exec';
+let currentUser=JSON.parse(localStorage.getItem('studyflow_user')||'null');
+let appData={tasks:[],courses:[],backlog:[],notifications:[],studySessions:[]};
 
-        // التحقق من حالة تسجيل الدخول عند فتح الصفحة
-        window.onload = () => {
-            if (currentUser) {
-                showAppScreen();
-            }
-        };
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const isToday=v=>{if(!v)return false;const s=String(v).slice(0,10);return s===todayISO()||new Date(v).toDateString()===new Date().toDateString()};
+const formatDate=v=>{if(!v)return '';const d=new Date(v);return isNaN(d)?String(v):d.toLocaleDateString('en-US',{month:'short',day:'numeric'})};
+const statusDone=v=>String(v).toLowerCase()==='completed';
+const priorityClass=v=>String(v||'').toLowerCase();
 
-        // تبديل شاشات الدخول / الإنشاء
-        function toggleAuth() {
-            const loginForm = document.getElementById('login-form');
-            const regForm = document.getElementById('register-form');
-            if (loginForm.style.display === 'none') {
-                loginForm.style.display = 'block'; regForm.style.display = 'none';
-            } else {
-                loginForm.style.display = 'none'; regForm.style.display = 'block';
-            }
-        }
+document.getElementById('current-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+document.querySelectorAll('.nav-item[data-section]').forEach(el=>el.addEventListener('click',()=>showSection(el.dataset.section)));
 
-        // دالة مركزية للتواصل مع الـ API
-        async function apiCall(payload) {
-            try {
-                // نستخدم text/plain لتجنب مشاكل الـ CORS preflight مع Google Apps Script
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                if (result.status === 'error') throw new Error(result.message);
-                return result.data;
-            } catch (error) {
-                showToast(error.message, 'error');
-                throw error;
-            }
-        }
+window.addEventListener('load',()=>{if(currentUser)showAppScreen()});
 
-        // تسجيل الدخول
-        async function login() {
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            if (!email || !password) return showToast('Please enter email and password', 'error');
-
-            document.getElementById('login-loader').style.display = 'block';
-            try {
-                const data = await apiCall({ action: 'login', Email: email, Password: password });
-                currentUser = data;
-                localStorage.setItem('studyflow_user', JSON.stringify(data));
-                showToast('Login successful!', 'success');
-                showAppScreen();
-            } catch (e) {
-                // الخطأ يظهر من الدالة apiCall
-            } finally {
-                document.getElementById('login-loader').style.display = 'none';
-            }
-        }
-
-        // إنشاء حساب
-        async function register() {
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-password').value;
-            if (!name || !email || !password) return showToast('Please fill all fields', 'error');
-
-            try {
-                const data = await apiCall({ action: 'register', Name: name, Email: email, Password: password });
-                currentUser = data;
-                localStorage.setItem('studyflow_user', JSON.stringify(data));
-                showToast('Account created successfully!', 'success');
-                showAppScreen();
-            } catch (e) { }
-        }
-
-        // تسجيل خروج
-        function logout() {
-            localStorage.removeItem('studyflow_user');
-            currentUser = null;
-            document.getElementById('app-screen').style.display = 'none';
-            document.getElementById('auth-screen').style.display = 'flex';
-        }
-
-        // عرض شاشة التطبيق وجلب البيانات
-        function showAppScreen() {
-            document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('app-screen').style.display = 'flex';
-            
-            // تحية المستخدم
-            const hour = new Date().getHours();
-            let greeting = 'Good Evening';
-            if (hour < 12) greeting = 'Good Morning';
-            else if (hour < 18) greeting = 'Good Afternoon';
-            document.getElementById('user-greeting').innerText = `${greeting}, ${currentUser.Name.split(' ')[0]} 👋`;
-
-            fetchUserData();
-        }
-
-        // جلب بيانات المستخدم وعرضها
-        async function fetchUserData() {
-            try {
-                showToast('Loading your schedule...', 'info');
-                const data = await apiCall({ action: 'getUserData', UserID: currentUser.UserID });
-                
-                // تحديث الإحصائيات (أمثلة)
-                document.getElementById('stat-courses').innerText = data.courses ? data.courses.length : 0;
-                document.getElementById('stat-tasks').innerText = data.tasks ? data.tasks.length : 0;
-                document.getElementById('stat-backlog').innerText = data.backlog ? data.backlog.length : 0;
-
-                // تحديث قائمة المهام
-                renderTasks(data.tasks || []);
-                showToast('Data synced!', 'success');
-            } catch (e) { }
-        }
-
-        // رسم المهام في الواجهة (محاكاة لنظام NOW, NEXT, LATER)
-        function renderTasks(tasks) {
-            const container = document.getElementById('tasks-container');
-            if (tasks.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">Your day is clear! Take a rest or add new tasks.</p>';
-                return;
-            }
-
-            let html = '';
-            tasks.forEach((task, index) => {
-                let badgeClass = index === 0 ? 'now' : (index === 1 ? 'next' : '');
-                let badgeText = index === 0 ? 'NOW' : (index === 1 ? 'NEXT' : 'LATER');
-                
-                html += `
-                <div class="task-row ${badgeClass}">
-                    <div>
-                        <span style="font-size: 11px; font-weight: bold; letter-spacing: 1px; color: var(--text-muted);">${badgeText}</span>
-                        <h3 style="margin-top: 5px; font-size: 16px;">${task.Title}</h3>
-                        <p style="font-size: 12px; color: var(--text-muted);"><i class="fas fa-clock"></i> ${task.Duration} min | ${task.Type}</p>
-                    </div>
-                    <div>
-                        <input type="checkbox" style="width: 20px; height: 20px; cursor: pointer;">
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        // نظام التنبيهات (Toast)
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.style.borderLeftColor = type === 'error' ? 'var(--danger)' : (type === 'info' ? 'var(--secondary)' : 'var(--success)');
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-    </script>
+function toggleAuth(){const login=document.getElementById('login-form'),reg=document.getElementById('register-form');const showReg=reg.style.display==='none';login.style.display=showReg?'none':'block';reg.style.display=showReg?'block':'none'}
+async function apiCall(payload){
+  const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  const result=await response.json();
+  if(result.status==='error')throw new Error(result.message||'API error');
+  return result.data;
+}
+async function login(){
+  const email=document.getElementById('login-email').value.trim(),password=document.getElementById('login-password').value;
+  if(!email||!password)return showToast('Please enter email and password','error');
+  document.getElementById('login-loader').style.display='block';
+  try{const data=await apiCall({action:'login',Email:email,Password:password});currentUser=data;localStorage.setItem('studyflow_user',JSON.stringify(data));showToast('Login successful!');showAppScreen()}catch(e){showToast(e.message,'error')}finally{document.getElementById('login-loader').style.display='none'}
+}
+async function register(){
+  const name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),password=document.getElementById('reg-password').value;
+  if(!name||!email||!password)return showToast('Please fill all fields','error');
+  try{const data=await apiCall({action:'register',Name:name,Email:email,Password:password});currentUser=data;localStorage.setItem('studyflow_user',JSON.stringify(data));showToast('Account created successfully!');showAppScreen()}catch(e){showToast(e.message,'error')}
+}
+function logout(){localStorage.removeItem('studyflow_user');currentUser=null;appData={tasks:[],courses:[],backlog:[],notifications:[],studySessions:[]};document.getElementById('app-screen').style.display='none';document.getElementById('auth-screen').style.display='flex';showToast('Logged out','info')}
+function showAppScreen(){
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  const hour=new Date().getHours();const g=hour<12?'Good Morning':hour<18?'Good Afternoon':'Good Evening';
+  const first=(currentUser?.Name||'User').split(' ')[0];
+  document.getElementById('user-greeting').textContent=`${g}, ${first} 👋`;
+  showSection('dashboard');fetchUserData();
+}
+function showSection(section){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const target=document.getElementById(`view-${section}`);if(target)target.classList.add('active');
+  document.querySelectorAll('.nav-item[data-section]').forEach(n=>n.classList.toggle('active',n.dataset.section===section));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+async function fetchUserData(){
+  if(!currentUser?.UserID)return;
+  try{showToast('Refreshing data...','info');const data=await apiCall({action:'getUserData',UserID:currentUser.UserID});appData={...appData,...data};renderAll();showToast('Data synced!')}catch(e){showToast(e.message,'error')}
+}
+function renderAll(){renderStats();renderDashboard();renderTasks();renderCourses();renderBacklog();renderSchedule()}
+function renderStats(){
+  const todayCourses=appData.courses.filter(c=>isToday(c.Date));
+  const todayTasks=appData.tasks.filter(t=>isToday(t.Date));
+  const remaining=todayTasks.filter(t=>!statusDone(t.Status)).length;
+  const total=todayTasks.length,done=total-todayTasks.filter(t=>!statusDone(t.Status)).length;
+  const progress=total?Math.round(done/total*100):0;
+  document.getElementById('stat-courses').textContent=todayCourses.length;
+  document.getElementById('stat-tasks').textContent=remaining;
+  document.getElementById('stat-backlog').textContent=appData.backlog.filter(b=>!statusDone(b.Status)).length;
+  document.getElementById('stat-progress').textContent=progress+'%';
+  document.getElementById('progress-fill').style.width=progress+'%';
+}
+function taskItemHtml(task,showActions=true){
+  const done=statusDone(task.Status);const id=escapeHtml(task.TaskID);
+  return `<div class="item" style="${done?'opacity:.65':''}">
+    <div class="item-main"><h3 style="${done?'text-decoration:line-through':''}">${escapeHtml(task.Title)}</h3>
+    <p>${escapeHtml(task.Type||'Task')} • ${escapeHtml(task.Duration||'0')} min ${task.Deadline?`• Due ${escapeHtml(task.Deadline)}`:''}</p></div>
+    <div class="item-actions">${task.Priority?`<span class="badge ${priorityClass(task.Priority)}">${escapeHtml(task.Priority)}</span>`:''}
+    ${showActions?`<input class="check" type="checkbox" ${done?'checked':''} onchange="toggleTask('${id}',this.checked)">`:''}</div>
+  </div>`;
+}
+function renderDashboard(){
+  const todayTasks=appData.tasks.filter(t=>isToday(t.Date)).sort((a,b)=>Number(a.Deadline?.replace(':','')||9999)-Number(b.Deadline?.replace(':','')||9999));
+  const list=document.getElementById('dashboard-list');list.innerHTML=todayTasks.length?todayTasks.slice(0,5).map(taskItemHtml).join(''):`<div class="empty">Your day is clear! Add tasks, courses or backlog sessions.</div>`;
+}
+function renderTasks(){
+  const list=document.getElementById('tasks-list');
+  list.innerHTML=appData.tasks.length?appData.tasks.slice().reverse().map(taskItemHtml).join(''):`<div class="empty">No tasks yet. Click “+ Add Task”.</div>`;
+}
+function renderCourses(){
+  const list=document.getElementById('courses-list');
+  list.innerHTML=appData.courses.length?appData.courses.slice().sort((a,b)=>`${a.Date} ${a.StartTime}`.localeCompare(`${b.Date} ${b.StartTime}`)).map(c=>`
+  <div class="item"><div class="item-main"><h3>${escapeHtml(c.CourseName)}</h3><p>${escapeHtml(formatDate(c.Date))} • ${escapeHtml(c.StartTime||'')} - ${escapeHtml(c.EndTime||'')}</p></div>
+  <div class="item-actions"><span class="badge">${escapeHtml(c.Status||'Not Completed')}</span></div></div>`).join(''):`<div class="empty">No courses yet. Click “+ Add Course”.</div>`;
+}
+function renderBacklog(){
+  const list=document.getElementById('backlog-list');
+  list.innerHTML=appData.backlog.length?appData.backlog.map(b=>`
+  <div class="item"><div class="item-main"><h3>${escapeHtml(b.SessionName)}</h3><p>${escapeHtml(b.Subject||'')} • ${escapeHtml(b.Duration||'0')} min</p></div>
+  <div class="item-actions"><span class="badge ${priorityClass(b.Priority)}">${escapeHtml(b.Priority||'Medium')}</span></div></div>`).join(''):`<div class="empty">No backlog sessions. Great!</div>`;
+}
+function renderSchedule(){
+  const list=document.getElementById('schedule-list');
+  const rows=[];
+  appData.courses.filter(c=>isToday(c.Date)).forEach(c=>rows.push({time:c.StartTime||'',title:c.CourseName,meta:`Course • ${c.StartTime||''}-${c.EndTime||''}`,icon:'📚'}));
+  appData.tasks.filter(t=>isToday(t.Date)).forEach(t=>rows.push({time:t.Deadline||'23:59',title:t.Title,meta:`${t.Type||'Task'} • ${t.Duration||0} min`,icon:'📝'}));
+  rows.sort((a,b)=>a.time.localeCompare(b.time));
+  list.innerHTML=rows.length?rows.map(r=>`<div class="item"><div class="item-main"><h3>${r.icon} ${escapeHtml(r.title)}</h3><p>${escapeHtml(r.meta)}</p></div><span class="badge">${escapeHtml(r.time||'Any time')}</span></div>`).join(''):`<div class="empty">Nothing scheduled for today.</div>`;
+}
+async function toggleTask(taskId,checked){
+  try{await apiCall({action:'updateStatus',sheetName:'Tasks',idColumnName:'TaskID',recordId:taskId,newStatus:checked?'Completed':'Not Completed'});const task=appData.tasks.find(t=>t.TaskID===taskId);if(task)task.Status=checked?'Completed':'Not Completed';renderAll();showToast(checked?'Task completed ✅':'Task marked as not completed','success')}catch(e){showToast(e.message,'error');renderAll()}
+}
+function openModal(type){
+  document.getElementById(`modal-${type}`).classList.add('open');
+  if(type==='task')document.getElementById('task-date').value=todayISO();
+  if(type==='course')document.getElementById('course-date').value=todayISO();
+}
+function closeModal(type){document.getElementById(`modal-${type}`).classList.remove('open')}
+async function submitTask(){
+  const payload={action:'addTask',UserID:currentUser.UserID,Title:document.getElementById('task-title').value.trim(),Type:document.getElementById('task-type').value,Date:document.getElementById('task-date').value||todayISO(),Duration:document.getElementById('task-duration').value||30,Priority:document.getElementById('task-priority').value,Deadline:document.getElementById('task-deadline').value};
+  if(!payload.Title)return showToast('Enter a task name','error');
+  try{await apiCall(payload);closeModal('task');document.getElementById('task-title').value='';await fetchUserData();showSection('tasks');showToast('Task added ✅')}catch(e){showToast(e.message,'error')}
+}
+async function submitCourse(){
+  const payload={action:'addCourse',UserID:currentUser.UserID,CourseName:document.getElementById('course-name').value.trim(),Date:document.getElementById('course-date').value||todayISO(),StartTime:document.getElementById('course-start').value,EndTime:document.getElementById('course-end').value};
+  if(!payload.CourseName)return showToast('Enter a course name','error');
+  try{await apiCall(payload);closeModal('course');document.getElementById('course-name').value='';await fetchUserData();showSection('courses');showToast('Course added ✅')}catch(e){showToast(e.message,'error')}
+}
+async function submitBacklog(){
+  const payload={action:'addBacklog',UserID:currentUser.UserID,SessionName:document.getElementById('backlog-name').value.trim(),Subject:document.getElementById('backlog-subject').value.trim(),Duration:document.getElementById('backlog-duration').value||60,Priority:document.getElementById('backlog-priority').value};
+  if(!payload.SessionName)return showToast('Enter a session name','error');
+  try{await apiCall(payload);closeModal('backlog');document.getElementById('backlog-name').value='';await fetchUserData();showSection('backlog');showToast('Backlog session added ✅')}catch(e){showToast(e.message,'error')}
+}
+function showToast(message,type='success'){const t=document.getElementById('toast');t.textContent=message;t.className=`toast show ${type==='error'?'error':type==='info'?'info':''}`;clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),3200)}
+document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+</script>
 </body>
-</html> 
+</html>
